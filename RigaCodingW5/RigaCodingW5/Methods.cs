@@ -6,68 +6,68 @@ namespace RigaCodingW5
 {
 	class Methods
 	{
-		public static void AddStudent(Students[] studentList, int selection)
+		public static void AddStudent(Students[] studentArray, int selection)
 		{
-			while (studentList[selection] != null)
+			while (studentArray[selection] != null)
 			{
 				Console.WriteLine("You've selected a slot which was not empty, please select empty slot:");
-				selection = SelectFreeStudentSlot(studentList);
+				selection = SelectFreeStudentSlot(studentArray);
 			}
 
 			string name = AnswerToQuestion($"Insert #{selection+1} students name:");
 			string surename = AnswerToQuestion($"Insert  #{selection+1} students surname:");
 			int course = NumericAnswerToQuestion($"Which course is  #{selection+1} student :");
 
-			studentList[selection] = new Students(name, surename, course);
+			studentArray[selection] = new Students(name, surename, course);
 		}
 
-		public static void ListStudent(Students[] studentList)
+		public static void ListStudent(Students[] studentArray)
 		{
-			for (int i = 0; i < studentList.Length; i++)
+			for (int i = 0; i < studentArray.Length; i++)
 			{
-				if (studentList[i] == null)
+				if (studentArray[i] == null)
 				{
 					Console.WriteLine($"#{i+1} empty");
 				}
 				else
 				{
 					//Console.WriteLine($"#{i+1} {studentList[i].GetName()} {studentList[i].GetSurname()} {studentList[i].GetCourse()}");
-					Console.WriteLine($"#{i + 1} {studentList[i].Print()}");
+					Console.WriteLine($"#{i + 1} {studentArray[i].Print()}");
 				}
 			}
 		}
 
-		public static void EditStudent(Students[] studentList, int selection)
+		public static void EditStudent(Students[] studentArray, int selection)
 		{
-			while (studentList[selection] == null)
+			while (studentArray[selection] == null)
 			{
 				Console.WriteLine("You've selected a slot which is empty, please select existing student slot:");
-				selection = SelectStudentSlot(studentList);
+				selection = SelectStudentSlot(studentArray);
 			}
 			int edit = Convert.ToInt32(AnswerToQuestion("1 = name 2 = surname 3 = course"));
 
 			if (edit == 1)
 			{
-				studentList[selection].SetName(AnswerToQuestion("New Name"));
+				studentArray[selection].SetName(AnswerToQuestion("New Name"));
 			}
 
 			else if (edit == 2)
 			{
-				studentList[selection].SetSurname(AnswerToQuestion("New Surname"));
+				studentArray[selection].SetSurname(AnswerToQuestion("New Surname"));
 			}
 
 			else if (edit == 3)
 			{
-				studentList[selection].SetCourse(NumericAnswerToQuestion("New course"));
+				studentArray[selection].SetCourse(NumericAnswerToQuestion("New course"));
 			}
 		}
 
-		public static int SelectFreeStudentSlot(Students[] studentList)
+		public static int SelectFreeStudentSlot(Students[] studentArray)
 		{
 			Console.WriteLine("Following slots are empty");
-			for (int i = 0; i < studentList.Length; i++)
+			for (int i = 0; i < studentArray.Length; i++)
 			{
-				if (studentList[i] == null)
+				if (studentArray[i] == null)
 				{
 					Console.WriteLine($"#{i + 1} empty");
 				}
@@ -75,14 +75,14 @@ namespace RigaCodingW5
 			return NumericAnswerToQuestion("Which slot do you want to add the student to?")-1;
 		}
 
-		public static int SelectStudentSlot(Students[] studentList)
+		public static int SelectStudentSlot(Students[] studentArray)
 		{
-			Console.WriteLine("Following slots are editable");
-			for (int i = 0; i < studentList.Length; i++)
+			Console.WriteLine("Following slots are editable:");
+			for (int i = 0; i < studentArray.Length; i++)
 			{
-				if (studentList[i] != null)
+				if (studentArray[i] != null)
 				{
-					Console.WriteLine($"#{i + 1} {studentList[i].Print()}");
+					Console.WriteLine($"#{i + 1} {studentArray[i].Print()}");
 				}
 			}
 			return NumericAnswerToQuestion("Which student to edit?") - 1;

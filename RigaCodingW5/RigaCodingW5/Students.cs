@@ -42,11 +42,9 @@ namespace RigaCodingW5
 		{
 			course = inputCourse;
 		}
-
-		public string Print()
+		public void Print()
 		{
-			return $"{name} {surname} {course}";
+			Console.WriteLine( $"{name} {surname} {course}");
 		}
-
 	}
 }
